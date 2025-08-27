@@ -4,7 +4,7 @@
   import path from 'path';
 
   export default defineConfig({
-    base: '/VCR-Modern-Landing-Page/', // Add this line
+    base: '/site/', // Add this line
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
