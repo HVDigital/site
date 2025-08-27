@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ООО ВЦР - Цифровые решения для энергетики</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Global typography and utility tokens */
+        body { color: #ffffff; }
+        h1, h2, h3, h4 { color: #0b132b; }
+        .text-shadow { text-shadow: 0 1px 2px rgba(0,0,0,0.35); }
+
+        /* Buttons */
+        /* .btn-primary { */
+            /* background-color: #2563eb; blue-600 */
+            /* color: #ffffff; */
+        /* } */
+        /* .btn-primary:hover { background-color: #1d4ed8; blue-700 } */
+        /* .btn-secondary { */
+            /* background-color: transparent; */
+            /* color: #2563eb; blue-600 */
+            /* border: 2px solid #2563eb; */
+        /* } */
+        /* .btn-secondary:hover { background-color: rgba(37, 99, 235, 0.06); } */
+
+        /* Enhanced buttons */
+        .btn-primary {
+            /* background: linear-gradient(135deg, rgba(230,230,230), 0%, rgba(68,114,196) 50%, rgba(68,84,106) 100%); */
+            background-color: #2563eb;
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        .btn-primary:hover { 
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(79, 70, 229, 0.4);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            color: #2563eb;
+            border: 2px solid #2563eb;
+            /* background: rgba(255, 255, 255, 0.1);
+            color: #a855f7;
+            border: 2px solid transparent; */
+            background-clip: padding-box;
+            position: relative;
+        }
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            /* background: linear-gradient(135deg, #a855f7, #ec4899); */
+            background-color: transparent;
+            border-radius: inherit;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+        }
+        .btn-secondary:hover { 
+            background: rgba(94, 148, 240, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .logo {
+            background-image: url('logo-orig.png');
+            background-size: contain;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+                }
+        
+        .hero-bg {
+            background-image: url('hero.png');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            /* background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%); */
+        }
+
+        /* Subtle readability overlay for the hero */
+        .hero-bg::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle,rgba(255, 255, 255, 0.1) 0%, rgba(148, 187, 233, 0.1) 100%);
+            /* background: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(138, 130, 248, 0.2) 40%, rgba(10, 48, 221, 0.15) 100%); */
+            pointer-events: none;
+        }
+
+        .about-bg {
+            background-image: url('tower.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            clip-path: circle(97.4% at 98% 20%);
+            /* circle(99.6% at 100% 78%); */
+            /* polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%); */
+            /* background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%); */
+        }
+
+        .equipment-bg {
+            background-image: url('substation-2.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            clip-path: circle(99.7% at 0 51%);
+            /* polygon(0 0, 95% 0, 79% 100%, 0% 100%); */
+        }
+
+        .bg-image-container {
+            background-image: url('substation.jpg');
+            background-size: cover;
+            background-position: center;
+            clip-path: circle(97.2% at 99% 69%);
+        }
+
+        @media (max-width: 768px) {
+            .bg-image-container {
+                clip-path: circle(97.2% at 99% 69%);
+            }
+        }
+        
+        .trapezoid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 70%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            clip-path: polygon(0 0, 70% 0, 50% 100%, 0 100%);
+            display: flex;
+            align-items: center;
+            padding-left: 60px;
+            padding-right: 100px;
+        }
+        
+        /* Enhanced glass effect */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-text-2 {
+            background: linear-gradient(135deg, #7e93f3 0%, #311152 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-text-3 {
+            background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #f43f5e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Enhanced service cards */
+        .service-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.1), transparent);
+            transition: left 0.6s;
+        }
+        
+        .service-card:hover::before {
+            left: 100%;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(168, 85, 247, 0.2);
+            border-color: rgba(168, 85, 247, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .energy-grid {
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Enhanced logo items */
+        .logo-item {
+            filter: grayscale(100%) brightness(0.4) contrast(1.2);
+            opacity: 0.6;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 60px;
+            width: auto;
+            object-fit: contain;
+        }
+        
+        .logo-item:hover {
+            filter: grayscale(0%) brightness(1) contrast(1);
+            opacity: 1;
+            transform: scale(1.1) translateY(-2px);
+        }
+        
+        @media (max-width: 640px) {
+            .logo-item {
+                height: 40px;
+            }
+        }
+
+        /* Enhanced shadow effects */
+        .shadow-glow {
+            box-shadow: 
+                0 0 30px rgba(147, 146, 147, 0.3),
+                0 0 60px rgba(198, 198, 234, 0.2),
+                0 0 90px rgba(255, 254, 254, 0.1);
+        }
+
+        .text-glow {
+            text-shadow: 
+                0 0 10px rgba(168, 85, 247, 0.5),
+                0 0 20px rgba(236, 72, 153, 0.3),
+                0 0 30px rgba(244, 63, 94, 0.2);
+        }
+
+    </style>
+</head>
+<body class="bg-white-50">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-10 glass-effect">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-slate-900 hover:text-slate-700 transition-colors">О нас</a>
+                    <a href="#services" class="text-slate-900 hover:text-slate-700 transition-colors">Услуги</a>
+                    <a href="#competencies" class="text-slate-900 hover:text-slate-700 transition-colors">Компетенции</a>
+                    <a href="#contact" class="px-6 py-2 rounded-full btn-primary transition-colors">Контакты</a>
+                </div>
+                <button class="md:hidden text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg flex items-center relative overflow-hidden">
+        <div class="absolute inset-0 flex -top-16 -right-20 pointer-events-none">
+            <div class="w-[80rem] h-[80rem] rounded-full bg-gradient-to-br from-blue-300/30 via-cyan-200/20 to-transparent blur-3xl"></div>
+        </div>
+        <div class="container mx-auto px-6 py-20 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <!-- Logo Section -->
+                <div class="floating-animation">
+                    <div>
+                        <img src="logo-orig.png" alt="ООО ВЦР Логотип" class="mx-auto w-full h-auto max-w-[220px] sm:max-w-[280px] md:max-w-[340px] lg:max-w-[400px] object-contain drop-shadow-2xl">
+                    </div>
+                    <h1 class="text-xl md:text-2xl lg:text-3xl font-bold gradient-text mb-3 leading-tight tracking-tight">
+                        Ваш надежный партнер в создании и внедрении инновационных цифровых решений для энергообъектов
+                    </h1>
+                    <p class="text-slate-700 md:text-lg max-w-2xl mx-auto mb-6">
+                        Проектирование, поставки, внедрение и обслуживание цифровых решений для энергетики
+                    </p>
+                </div>
+                <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <a href="#services" class="px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-xl btn-primary hover:shadow-2xl hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-blue-300/40">
+                        <i class="fas fa-rocket mr-2"></i>
+                        Наши услуги
+                    </a>
+                    <a href="#contact" class="px-8 py-4 rounded-full text-lg font-semibold transition-all btn-secondary hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-blue-300/20">
+                        <i class="fas fa-envelope mr-2"></i>
+                        Написать нам
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section --> 
+    <section id="about" class="bg-white relative overflow-hidden">
+        <div class="pointer-events-none absolute -bottom-16 -right-16 w-[40rem] h-[40rem] rounded-full bg-gradient-to-br from-blue-300/30 via-cyan-300/20 to-transparent blur-3xl"></div>
+        <div class="max-w-10xl mx-auto px-6 flex">
+            <div class="w-full lg:w-2/3 flex flex-col">
+                <div class="container mr-auto mt-16 mb-16 scroll-reveal">
+                    <div class="max-w-3xl mr-auto md:ml-8">
+                        <h2 class="text-left text-4xl font-bold gradient-text mb-6">О компании</h2>
+                        <div class="space-y-6 mb-8">
+                            <div class="relative pl-8 border-l-4 border-blue-500 bg-gradient-to-r from-blue-50 to-transparent p-4 rounded-r-lg">
+                                <p class="text-left text-lg text-slate-700 leading-relaxed font-medium">
+                                    <span class="text-blue-600 font-semibold">ООО ВЦР</span> — технологический лидер, способный раскрыть потенциал цифровых решений и обеспечить переход на новый технологический уровень энергетической отрасли. Компания занимается созданием и внедрением надежных цифровых решений для энергообъектов.
+                                </p>
+                            </div>
+                            
+                            <p class="text-left text-lg text-slate-700 leading-relaxed">
+                                Мы специализируемся на <span class="font-semibold text-slate-800">проектировании</span>, выполнении <span class="font-semibold text-slate-800">строительно-монтажных</span> и <span class="font-semibold text-slate-800">пуско-наладочных работ</span>, комплексных поставках различного оборудования, обслуживании цифровых подстанций и систем управления энергообъектами.
+                            </p>
+          
+                            <p class="text-left text-lg text-slate-700 leading-relaxed">
+                                В команде задействованы <span class="font-semibold text-slate-800">высококвалифицированные специалисты</span> с многолетним опытом реализации сложных проектов как в России, так и за рубежом.
+                            </p>
+  
+                            <p class="text-left text-lg text-slate-700 leading-relaxed">
+                                <span class="font-semibold text-slate-800">Крупные предприятия</span> топливно-энергетического комплекса, энергоёмкие промышленные предприятия, научно-исследовательские и испытательные центры являются основными заказчиками предлагаемых решений.
+                            </p>
+                        </div>
+                        <div class="text-left space-y-4">
+                            <!-- Mission Section -->
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-2xl font-bold text-gray-800">Наша цель</h3>
+                            </div>
+                            <p class="text-slate-700 text-lg leading-relaxed font-medium">
+                                Ускорять <span class="text-blue-600 font-semibold">цифровую трансформацию энергетики</span>, делая её точнее, безопаснее и эффективнее.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Side - Background Image -->
+            <div class="hidden lg:block lg:w-full mb-16 mt-16 mr-10">
+                <div class="about-bg w-full min-h-screen rounded-2xl"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Digital Solutions Section -->
+    <section class="py-20 bg-white">
+        
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <!-- Left Column - Text Section -->
+                <div class="space-y-6 scroll-reveal">
+                    <!-- Header -->
+                    <h2 class="text-4xl font-bold text-slate-900 leading-tight">
+                        Реализация <span class="gradient-text">комплексных цифровых решений</span> для ЦПС
+                    </h2>
+                    
+                    <!-- Company Description -->
+                    <p class="text-lg text-slate-700 leading-relaxed">
+                        Наша компания специализируется на разработке и внедрении передовых цифровых технологий для центров питания и подстанций, обеспечивая высокий уровень автоматизации и контроля энергетических систем.
+                    </p>
+                    
+                    <!-- Key Technologies Section -->
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-bold text-slate-900">Ключевые технологии:</h3>
+                        
+                        <p class="text-lg text-slate-700 leading-relaxed">
+                            Использование современных <span class="font-bold">цифровых измерительных трансформаторов</span> позволяет значительно повысить точность измерений и надежность системы.
+                        </p>
+                        
+                        <!-- Bulleted List -->
+                        <div class="space-y-3">
+                            <div class="flex items-start">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full mt-3 mr-3 flex-shrink-0"></div>
+                                <span class="text-lg text-slate-700">Оптические трансформаторы тока</span>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-2 h-2 bg-blue-500 rounded-full mt-3 mr-3 flex-shrink-0"></div>
+                                <span class="text-lg text-slate-700">Электронные трансформаторы напряжения</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-lg text-slate-700 leading-relaxed">
+                            Данные технологии обеспечивают превосходную производительность и долговечность оборудования в самых требовательных условиях эксплуатации, гарантируя:
+                        </p>
+                    </div>
+                    
+                    <!-- Highlight Boxes -->
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <div class="bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-3 rounded-2xl shadow-sm">
+                            <span class="font-bold text-white">Точность</span>
+                        </div>
+                        <div class="bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-3 rounded-2xl shadow-sm">
+                            <span class="font-bold text-white">Безопасность</span>
+                        </div>
+                        <div class="bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-3 rounded-2xl shadow-sm">
+                            <span class="font-bold text-white">Надежность</span>
+                        </div>
+                    </div> 
+                </div>
+                
+                <!-- Right Column - Images Section -->
+                <div class="grid grid-cols-2 gap-4 scroll-reveal">
+                    <!-- Image 1 - Electrical Equipment -->
+                    <div class="relative aspect-square rounded-3xl overflow-hidden group">
+                        <img src="img1.jpg" alt="Электрооборудование" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                            <span class="text-sm font-medium text-white">Электрооборудование: высокоточные измерения и контроль параметров сети</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Image 2 - Power Lines -->
+                    <div class="relative aspect-square rounded-xl overflow-hidden group">
+                        <img src="img2.jpg" alt="Линии электропередачи" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                            <span class="text-sm font-medium text-white">Линии электропередачи: надежная передача данных и мощности</span>
+                        </div>
+                    </div>
+
+                    <!-- Image 3 - Control Panel -->
+                    <div class="relative aspect-square rounded-xl overflow-hidden group">
+                        <img src="img3.jpg" alt="Щит управления" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                            <span class="text-sm font-medium text-white">Щит управления: оперативный мониторинг и автоматизация процессов</span>
+                        </div>
+                    </div>
+
+                    <!-- Image 4 - Digital Display -->
+                    <div class="relative aspect-square rounded-xl overflow-hidden group">
+                        <img src="img4.jpg" alt="Цифровая индикация" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                            <span class="text-sm font-medium text-white">Цифровая индикация: наглядность и прозрачность работы системы</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Equipment Section -->
+    <section class="bg-white">
+        <div class="min-h-screen max-w-10xl mx-auto px-6 flex">
+            <!-- Right Side - Background Image -->
+            <div class="hidden lg:block lg:w-full mb-16 mt-16 ml-10">
+                <div class="equipment-bg w-full min-h-screen rounded-2xl"></div>
+                
+            </div>
+            <div class="w-full lg:w-2/3 flex flex-col mt-16">
+                <div class="container mr-auto px-6 mt-16 mb-16">
+                    <div class="max-w-3xl mr-auto scroll-reveal">
+                        <h2 class="text-4xl font-bold text-slate-900 leading-tight mb-12">
+                            Ключевое оборудование <span class="gradient-text">для цифровых решений</span>
+                        </h2>
+                        <p class="text-left text-base md:text-xl text-gray-600 mb-8 leading-relaxed">
+                            На базе интеграции цифровых измерительных ТТ и ТН создаются комплексные решения для различных задач энергетики и промышленности.
+                        </p>
+                        
+                        <div class="text-left">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Основные направления:</h3>
+                            
+                            <div class="space-y-4 mb-8">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-blue-500 rounded-full mr-4"></div>
+                                    <span class="text-gray-700">Цифровые точки коммерческого и технического учёта</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-blue-500 rounded-full mr-4"></div>
+                                    <span class="text-gray-700">Релейная защита и автоматика в архитектуре ЦПС</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-blue-500 rounded-full mr-4"></div>
+                                    <span class="text-gray-700">Мониторинг и контроль технологических процессов на промышленных предприятиях</span>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Преимущества для клиентов:</h3>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <!-- Advantage 1 -->
+                                <div class="service-card group bg-white rounded-2xl p-6 shadow-lg hover:bg-gradient-to-br hover:from-white hover:to-blue-50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-0">
+                                    <div class="h-18 px-4 py-3 rounded-xl text-center justify-center font-semibold text-slate-100 bg-gradient-to-r from-blue-500 to-blue-600 group-hover:bg-blue-50 group-hover:border-blue-200 group-hover:text-slate-700 transition-colors duration-300">
+                                        01 Экономия затрат
+                                    </div>
+                                    <p class="text-sm text-gray-700 leading-relaxed mt-3">
+                                        Снижение капитальных и операционных расходов за счет цифровизации процессов учета и контроля.
+                                    </p>
+                                </div>
+
+                                <!-- Advantage 2 -->
+                                <div class="service-card group bg-white rounded-2xl p-6 shadow-lg hover:bg-gradient-to-br hover:from-white hover:to-blue-50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-0">
+                                    <div class="h-18 px-4 py-3 rounded-xl text-center justify-center font-semibold text-slate-100 bg-gradient-to-r from-blue-500 to-blue-500 group-hover:bg-blue-50 group-hover:border-blue-200 group-hover:text-slate-700 transition-colors duration-300">
+                                        02 Надежность данных
+                                    </div>
+                                    <p class="text-sm text-gray-700 leading-relaxed mt-3">
+                                        Высокая точность измерений и защита от искажений благодаря цифровой передаче сигналов.
+                                    </p>
+                                </div>
+
+                                <!-- Advantage 3 -->
+                                <div class="service-card group bg-white rounded-2xl p-6 shadow-lg hover:bg-gradient-to-br hover:from-white hover:to-blue-50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-0">
+                                    <div class="h-18 px-4 py-3 rounded-xl text-center justify-center font-semibold text-slate-100 bg-gradient-to-r from-blue-500 to-blue-500 group-hover:bg-blue-50 group-hover:border-blue-200 group-hover:text-slate-700 transition-colors duration-300">
+                                        03 Мониторинг данных
+                                    </div>
+                                    <p class="text-sm text-gray-700 leading-relaxed mt-3">
+                                        Непрерывный контроль состояния оборудования и технологических параметров в режиме реального времени.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-20 bg-gray-900 rounded-3xl ml-10 mr-10"> <!-- bg-gradient-to-br from-sky-50 to-indigo-950 -->
+        <div class="container mx-auto px-6 mb-16">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-4xl font-bold gradient-text-2 mb-6">Эффекты наших решений</h2>
+                <p class="text-xl text-gray-100">Экономия CAPEX/OPEX благодаря цифровым технологиям</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-8">
+                <div class="group glass-effect rounded-2xl p-8 text-center hover:shadow-2xl hover:bg-white/10 transition-all duration-500 hover:-translate-y-2 scroll-reveal">
+                    <div class="text-5xl font-bold gradient-text mb-4">↓40%</div>
+                    <h4 class="text-lg font-semibold text-white mb-2">Проектирование</h4>
+                    <p class="text-gray-300 text-sm">Сокращение сроков проектирования</p>
+                </div>
+                <div class="group glass-effect rounded-2xl p-8 text-center shadow-glow hover:shadow-2xl hover:bg-white/10 transition-all duration-500 hover:-translate-y-2 scroll-reveal">
+                    <div class="text-5xl font-bold gradient-text mb-4">↓30%</div>
+                    <h4 class="text-lg font-semibold text-white mb-2">Оборудование</h4>
+                    <p class="text-gray-300 text-sm">Оптимизация затрат на оборудование</p>
+                </div>
+                <div class="group glass-effect rounded-2xl p-8 text-center hover:shadow-2xl hover:bg-white/10 transition-all duration-500 hover:-translate-y-2 scroll-reveal">
+                    <div class="text-5xl font-bold gradient-text mb-4">↓40%</div>
+                    <h4 class="text-lg font-semibold text-white mb-2">СМР</h4>
+                    <p class="text-gray-300 text-sm">Строительно-монтажные работы</p>
+                </div>
+                <div class="group glass-effect rounded-2xl p-8 text-center shadow-glow hover:shadow-2xl hover:bg-white/10 transition-all duration-500 hover:-translate-y-2 scroll-reveal">
+                    <div class="text-5xl font-bold gradient-text mb-4">↓30%</div>
+                    <h4 class="text-lg font-semibold text-white mb-2">ПНР</h4>
+                    <p class="text-gray-300 text-sm">Пуско-наладочные работы</p>
+                </div>
+                <div class="group glass-effect rounded-2xl p-8 text-center hover:shadow-2xl hover:bg-white/10 transition-all duration-500 hover:-translate-y-2 scroll-reveal">
+                    <div class="text-5xl font-bold gradient-text mb-4">↓30%</div>
+                    <h4 class="text-lg font-semibold text-white mb-2">Обслуживание</h4>
+                    <p class="text-gray-300 text-sm">Эксплуатационные расходы</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50 relative overflow-hidden">
+        <div class="pointer-events-none absolute -top-16 -left-16 w-[30rem] h-[30rem] rounded-full bg-gradient-to-br from-blue-300/30 via-cyan-300/20 to-transparent blur-3xl"></div>
+        <div class="pointer-events-none absolute -bottom-16 -right-16 w-[40rem] h-[40rem] rounded-full bg-gradient-to-br from-blue-300/30 via-cyan-300/20 to-transparent blur-3xl"></div>
+        <div class="container max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-4xl font-bold text-left gradient-text mb-2">Наши услуги</h2>
+                <p class="text-xl text-gray-600 text-left max-w-3xl">
+                    Комплексный портфель услуг для энергосистем и промышленных объектов
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="service-card group bg-white rounded-2xl p-8 shadow-lg hover:bg-gradient-to-br hover:from-white hover:to-blue-50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-0 scroll-reveal">
+                    <div class="relative mb-6">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-300 to-blue-600 rounded-xl shadow-lg group-hover:scale-110 transition-all duration-300">
+                            <i class="fas fa-drafting-compass text-white text-2xl"></i>
+                        </div>
+                        <div class="absolute -top-2 -right-2 w-6 h-6 bg-blue-200 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900 group-hover:text-blue-700 transition-colors duration-300">Проектирование ПС и ЦПС</h3>
+                    <p class="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">Разработка проектной документации для цифровых подстанций с учетом современных стандартов.</p>
+                    <div class="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="w-12 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></div>
+                    </div>
+                </div>
+
+                <div class="service-card group bg-white rounded-2xl p-8 shadow-lg hover:bg-gradient-to-br hover:from-white hover:to-blue-50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-0 scroll-reveal">
+                    <div class="relative mb-6">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-300 to-emerald-600 rounded-xl shadow-lg group-hover:scale-110 transition-all duration-300">
+                            <i class="fas fa-truck text-white text-2xl"></i>
+                        </div>
+                        <div class="absolute -top-2 -right-2 w-6 h-6 bg-green-200 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900 group-hover:text-green-700 transition-colors duration-300">Комплексные поставки оборудования</h3>
+                    <p class="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">Поставка высоковольтного оборудования от ведущих производителей.</p>
+                    <div class="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="w-12 h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full"></div>
+                    </div>
+                </div>
+
+                <div class="service-card group bg-white rounded-2xl p-8 shadow-lg hover:bg-gradient-to-br hover:from-white hover:to-blue-50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-0 scroll-reveal">
+                    <div class="relative mb-6">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-300 to-pink-600 rounded-xl shadow-lg group-hover:scale-110 transition-all duration-300">
+                            <i class="fas fa-tools text-white text-2xl"></i>
+                        </div>
+                        <div class="absolute -top-2 -right-2 w-6 h-6 bg-purple-200 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900 group-hover:text-purple-700 transition-colors duration-300">СМР и ПНР</h3>
+                    <p class="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">Выполнение строительно-монтажных и пуско-наладочных работ.</p>
+                    <div class="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="w-12 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+                    </div>
+                </div>
+
+                <div class="service-card group bg-white rounded-2xl p-8 shadow-lg hover:bg-gradient-to-br hover:from-white hover:to-blue-50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-0 scroll-reveal">
+                    <div class="relative mb-6">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-cyan-300 to-blue-600 rounded-xl shadow-lg group-hover:scale-110 transition-all duration-300">
+                            <i class="fas fa-microchip text-white text-2xl"></i>
+                        </div>
+                        <div class="absolute -top-2 -right-2 w-6 h-6 bg-cyan-200 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900 group-hover:text-cyan-700 transition-colors duration-300">Цифровые измерительные ТТ и ТН</h3>
+                    <p class="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">Оптические трансформаторы тока и электронные трансформаторы напряжения.</p>
+                    <div class="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="w-12 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"></div>
+                    </div>
+                </div>
+
+                <div class="service-card group bg-white rounded-2xl p-8 shadow-lg hover:bg-gradient-to-br hover:from-white hover:to-blue-50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-0 scroll-reveal">
+                    <div class="relative mb-6">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-indigo-300 to-indigo-600 rounded-xl shadow-lg group-hover:scale-110 transition-all duration-300">
+                            <i class="fas fa-chart-line text-white text-2xl"></i>
+                        </div>
+                        <div class="absolute -top-2 -right-2 w-6 h-6 bg-indigo-200 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900 group-hover:text-indigo-700 transition-colors duration-300">Цифровые системы учета энергии</h3>
+                    <p class="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">Системы коммерческого и технического учета с высокой точностью.</p>
+                    <div class="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="w-12 h-1 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full"></div>
+                    </div>
+                </div>
+
+                <div class="service-card group bg-white rounded-2xl p-8 shadow-lg hover:bg-gradient-to-br hover:from-white hover:to-blue-50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-0 scroll-reveal">
+                    <div class="relative mb-6">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-orange-300 to-amber-600 rounded-xl shadow-lg group-hover:scale-110 transition-all duration-300">
+                            <i class="fas fa-cogs text-white text-2xl"></i>
+                        </div>
+                        <div class="absolute -top-2 -right-2 w-6 h-6 bg-orange-200 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900 group-hover:text-orange-700 transition-colors duration-300">Сервис и обслуживание</h3>
+                    <p class="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">Техническая поддержка и долгосрочное сопровождение объектов.</p>
+                    <div class="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="w-12 h-1 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience and Key Clients Section -->
+    <section id="competencies" class="py-20 bg-white">
+        <div class="min-h-screen flex">
+            <!-- Left Side - Content Area -->
+            <div class="w-full lg:w-1/2 flex flex-col">
+                <!-- Main Content Area -->
+                <div class="flex-grow flex items-center">
+                    <div class="max-w-2xl mx-auto p-4 lg:p-8 scroll-reveal">
+                        <!-- Header -->
+                        <h2 class="text-4xl font-bold text-slate-900 leading-tight mb-2">
+                            Опыт и <span class="gradient-text">ключевые заказчики</span>
+                        </h2>
+                        
+                        <!-- Intro Paragraph -->
+                        <p class="text-base lg:text-lg text-slate-700 leading-relaxed mb-6">
+                            За время работы нашей компанией реализовано <span class="font-bold">более 60 проектов</span> по цифровизации и автоматизации энергетических объектов различного масштаба и сложности.
+                        </p>
+                        
+                        <!-- Second Paragraph -->
+                        <p class="text-base lg:text-lg text-slate-700 leading-relaxed mb-8">
+                            Специализируемся на <span class="font-bold">реконструкции и модернизации</span> существующих энергетических систем с применением передовых цифровых технологий и современного оборудования.
+                        </p>
+                        
+                        <!-- Key Clients Section -->
+                        <div class="space-y-6">
+                            <h3 class="text-xl font-bold text-white">Ключевые заказчики:</h3>
+                            
+                            <!-- Client Logos Grid -->
+                            <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+                                <!-- Россети Logo -->
+                                <div class="flex flex-col items-center p-4 glass-effect border border-white/10 rounded-xl hover:bg-white/5 transition-colors">
+                                    <img class="logo-item mb-2" alt="Россети" src="logo1.svg" />
+                                </div>
+                                
+                                <!-- Росатом Logo -->
+                                <div class="flex flex-col items-center p-4 glass-effect border border-white/10 rounded-xl hover:bg-white/5 transition-colors">
+                                    <img class="logo-item mb-2" alt="Росатом" src="logo3.svg" />
+                                </div>
+                                
+                                <!-- РУСАЛ Logo -->
+                                <div class="flex flex-col items-center p-4 glass-effect border border-white/10 rounded-xl hover:bg-white/5 transition-colors">
+                                    <img class="logo-item mb-2" alt="РУСАЛ" src="logo5.svg" />
+                                </div>
+                                
+                                <!-- УГМК Logo -->
+                                <div class="flex flex-col items-center p-4 glass-effect border border-white/10 rounded-xl hover:bg-white/5 transition-colors">
+                                    <img class="logo-item mb-2" alt="УГМК" src="logo4.svg" />
+                                </div>
+                                
+                                <!-- Норильский никель Logo -->
+                                <div class="flex flex-col items-center p-4 glass-effect border border-white/10 rounded-xl hover:bg-white/5 transition-colors">
+                                    <img class="logo-item mb-2" alt="Норильский никель" src="logo6.svg" />
+                                </div>
+                                
+                                <!-- Транснефть Logo -->
+                                <div class="flex flex-col items-center p-4 glass-effect border border-white/10 rounded-xl hover:bg-white/5 transition-colors">
+                                    <img class="logo-item mb-2" alt="Транснефть" src="logo2.svg" />
+                                </div>
+
+                                <div class="flex flex-col items-center p-4 glass-effect border border-white/10 rounded-xl hover:bg-white/5 transition-colors">
+                                    <img class="logo-item mb-2" alt="Партнер" src="logo7.svg" />
+                                </div>
+
+                                <div class="flex flex-col items-center p-4 glass-effect border border-white/10 rounded-xl hover:bg-white/5 transition-colors">
+                                    <img class="logo-item mb-2" alt="Партнер" src="logo8.svg" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Side - Background Image -->
+            <div class="hidden lg:block lg:w-1/2 mr-10">
+                <div class="bg-image-container w-full min-h-screen mb-24 mt-24 rounded-2xl"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="relative py-24 bg-gray-900 overflow-hidden">
+        <div class="pointer-events-none absolute -top-24 -right-24 w-[40rem] h-[40rem] rounded-full bg-gradient-to-br from-blue-600/20 via-cyan-400/10 to-transparent blur-3xl"></div>
+        <div class="pointer-events-none absolute -bottom-24 -left-24 w-[48rem] h-[48rem] rounded-full bg-gradient-to-tr from-blue-600/10 via-indigo-500/10 to-transparent blur-3xl"></div>
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-14 scroll-reveal">
+                <h2 class="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight gradient-text-2">Контакты</h2>
+                <!-- <h2 class="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">Контакты</h2> -->
+                <p class="mt-4 text-gray-100 text-lg">Мы оперативно ответим и предложим лучшие решения под ваши задачи.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Left: Details -->
+                <div class="scroll-reveal">
+                    <div class="grid gap-5">
+                        <div class="group relative overflow-hidden rounded-2xl ring-1 ring-white/10 p-6 hover:bg-white/10 transition-all">
+                            <div class="flex items-start">
+                                <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-400 to-blue-600 text-white shadow-lg">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-semibold">Адрес</h4>
+                                    <p class="text-gray-300">119019, г. Москва, ул. Новый Арбат, д. 15, помещ. 2120</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group relative overflow-hidden rounded-2xl ring-1 ring-white/10 p-6 hover:bg-white/10 transition-all">
+                            <div class="flex items-start">
+                                <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-400 to-blue-600 text-white shadow-lg">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-semibold">Телефон</h4>
+                                    <a href="tel:+74951877710" class="text-gray-300 hover:text-white transition-colors">+7 (495) 187-77-10</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group relative overflow-hidden rounded-2xl ring-1 ring-white/10 p-6 hover:bg-white/10 transition-all">
+                            <div class="flex items-start">
+                                <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-400 to-blue-600 text-white shadow-lg">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-semibold">Email</h4>
+                                    <a href="mailto:info@hvdigital.ru" class="text-gray-300 hover:text-white transition-colors">info@hvdigital.ru</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group relative overflow-hidden rounded-2xl ring-1 ring-white/10 p-6 hover:bg-white/10 transition-all">
+                            <div class="flex items-start">
+                                <div class="mr-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-400 to-blue-600 text-white shadow-lg">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-semibold">Веб-сайт</h4>
+                                    <a href="https://www.hvdigital.ru" target="_blank" rel="noopener" class="text-gray-300 hover:text-white transition-colors">www.hvdigital.ru</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Form (kept as .scroll-reveal for map script) -->
+                <div class="scroll-reveal">
+                    <!-- <span class="inline-flex items-center px-3 py-1 mb-6 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-300 ring-1 ring-blue-400/30">Связаться с нами</span> -->
+                    <div class="relative rounded-3xl bg-white/5 ring-1 ring-white/10 p-1">
+                        <div class="rounded-[22px] bg-gradient-to-b from-gray-900 to-gray-950 p-8 shadow-glow">
+                            <h3 class="text-2xl font-bold gradient-text-2 mb-2">Отправить сообщение</h3>
+                            <p class="text-gray-300 mb-6">Опишите задачу — вернемся с предложением в ближайшее время.</p>
+                            <form class="space-y-5">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm text-gray-300 mb-2">Ваше имя</label>
+                                        <input type="text" required placeholder="Иван Иванов" class="w-full px-4 py-3 rounded-xl bg-white/10 text-white placeholder-gray-400 border border-white/10 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-300 mb-2">Email</label>
+                                        <input type="email" required placeholder="name@example.com" class="w-full px-4 py-3 rounded-xl bg-white/10 text-white placeholder-gray-400 border border-white/10 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-300 mb-2">Сообщение</label>
+                                    <textarea rows="5" required placeholder="Кратко опишите задачу" class="w-full px-4 py-3 rounded-xl bg-white/10 text-white placeholder-gray-400 border border-white/10 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 resize-none"></textarea>
+                                </div>
+                                <div class="flex items-start gap-3 text-sm text-gray-300">
+                                    <input id="privacy" type="checkbox" required class="mt-1 h-4 w-4 rounded border-white/20 bg-white/10 text-blue-500 focus:ring-blue-400/40">
+                                    <label for="privacy">Соглашаюсь с <a href="#" class="text-blue-300 hover:text-blue-200 underline">политикой конфиденциальности</a></label>
+                                </div>
+                                <button type="submit" class="w-64 inline-flex items-left justify-center gap-2 bg-gradient-to-r from-indigo-400 to-blue-600 text-white py-3 rounded-xl font-semibold hover:from-blue-500 hover:to-cyan-400 transition-all shadow-lg shadow-blue-600/20">
+                                    <i class="fas fa-paper-plane"></i>
+                                    Отправить сообщение
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-b from-gray-900 to-black text-gray-300">
+        <div class="container mx-auto px-6 py-14">
+            <!-- Top -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Brand -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="logo-orig-white.png" alt="ООО ВЦР Логотип" class="w-32 h-24 object-contain drop-shadow-xl">
+                        <h1 class="gradient-text-2 text-xl">Цифровые решения для энергетики</h1>
+                    </div>
+                    <p class="text-sm leading-relaxed text-gray-400">
+                        Разрабатываем и внедряем надежные цифровые решения для энергетической отрасли, повышая безопасность, точность и эффективность.
+                    </p>
+                    <div class="flex items-center space-x-4">
+                        <a href="#" aria-label="Telegram" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"><i class="fab fa-telegram text-white"></i></a>
+                        <a href="#" aria-label="VK" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"><i class="fab fa-vk text-white"></i></a>
+                        <a href="#" aria-label="YouTube" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"><i class="fab fa-youtube text-white"></i></a>
+                        <a href="#" aria-label="LinkedIn" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"><i class="fab fa-linkedin-in text-white"></i></a>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div class="grid grid-cols-2 gap-8 md:col-span-1">
+                    <div>
+                        <h5 class="text-white font-semibold mb-4">Навигация по сайту</h5>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#about" class="hover:text-white transition-colors">О нас</a></li>
+                            <li><a href="#competencies" class="hover:text-white transition-colors">Опыт и заказчики</a></li>
+                            <li><a href="#services" class="hover:text-white transition-colors">Услуги</a></li>
+                            <li><a href="#contact" class="hover:text-white transition-colors">Контакты</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Contacts -->
+                <div class="space-y-4">
+                    <h5 class="text-white font-semibold">Контакты</h5>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-map-marker-alt mt-0.5 text-blue-400"></i>
+                            <span>119019, г. Москва, ул. Новый Арбат, д. 15, помещ. 2120</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-phone text-blue-400"></i>
+                            <a href="tel:+74951877710" class="hover:text-white transition-colors">+7 (495) 187-77-10</a>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-envelope text-blue-400"></i>
+                            <a href="mailto:info@hvdigital.ru" class="hover:text-white transition-colors">info@hvdigital.ru</a>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-globe text-blue-400"></i>
+                            <a href="https://www.hvdigital.ru" target="_blank" rel="noopener" class="hover:text-white transition-colors">www.hvdigital.ru</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="border-t border-white/10 mt-12 pt-6 flex flex-col md:flex-row items-center justify-between">
+                <p class="text-xs text-gray-400">© 2025 ООО ВЦР. Все права защищены.</p>
+                <div class="mt-4 md:mt-0 text-xs text-gray-400 space-x-4">
+                    <a href="#" class="hover:text-white transition-colors">Политика конфиденциальности</a>
+                    <span class="opacity-50">|</span>
+                    <a href="#" class="hover:text-white transition-colors">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.md\\:hidden');
+        const mobileMenu = document.createElement('div');
+        mobileMenu.className = 'md:hidden absolute top-full left-0 w-full glass-effect p-6';
+        mobileMenu.innerHTML = `
+            <div class="space-y-4">
+                <a href="#services" class="block text-slate-900 hover:text-blue-700">Услуги</a>
+                <a href="#competencies" class="block text-slate-900 hover:text-blue-700">Компетенции</a>
+                <a href="#about" class="block text-slate-900 hover:text-blue-700">О нас</a>
+                <a href="#contact" class="block text-slate-900 hover:text-blue-700">Контакты</a>
+            </div>
+        `;
+
+        let mobileMenuVisible = false;
+
+        mobileMenuButton.addEventListener('click', () => {
+            const nav = document.querySelector('nav .container');
+            
+            if (!mobileMenuVisible) {
+                nav.appendChild(mobileMenu);
+                mobileMenuVisible = true;
+            } else {
+                if (nav.contains(mobileMenu)) {
+                    nav.removeChild(mobileMenu);
+                }
+                mobileMenuVisible = false;
+            }
+        });
+
+        // Close mobile menu when clicking on links
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                const nav = document.querySelector('nav .container');
+                if (nav.contains(mobileMenu)) {
+                    nav.removeChild(mobileMenu);
+                }
+                mobileMenuVisible = false;
+            }
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(30, 58, 138, 0.05)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.1)';
+            }
+        });
+
+        // Add interactive map placeholder
+        const contactSection = document.getElementById('contact');
+        const mapContainer = document.createElement('div');
+        mapContainer.className = 'scroll-reveal';
+        mapContainer.innerHTML = `
+            <div class="bg-gray-800 rounded-2xl p-8">
+                <div class="rounded-xl overflow-hidden h-64 md:h-96">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2244.7!2d37.6173!3d55.7558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTXCsDQ1JzIxLjAiTiAzN8KwMzcnMDIuMyJF!5e0!3m2!1sen!2sru!4v1642089123456!5m2!1sen!2sru"
+                        width="100%"
+                        height="100%"
+                        style="border:0;"
+                        allowfullscreen
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="АО ВЦР Office Location">
+                    </iframe>
+                </div>
+            </div>
+        `;
+        
+        const contactContainer = contactSection.querySelector('.container');
+        const contactGrid = contactSection.querySelector('.grid');
+        const gridChildren = contactGrid ? contactGrid.querySelectorAll(':scope > .scroll-reveal') : [];
+        const formColumn = gridChildren && gridChildren.length > 1 ? gridChildren[1] : null;
+
+        if (contactGrid && formColumn) {
+            // Put map in the right column (replacing the form)
+            contactGrid.replaceChild(mapContainer, formColumn);
+            // Move form below the grid (where map used to be)
+            formColumn.classList.remove('scroll-reveal');
+            formColumn.classList.add('mt-12', 'scroll-reveal');
+            contactContainer.appendChild(formColumn);
+        } else {
+            // Fallback: append map below
+            mapContainer.classList.add('mt-12');
+            contactContainer.appendChild(mapContainer);
+        }
+        if (typeof observer !== 'undefined' && observer && observer.observe) {
+            observer.observe(mapContainer);
+        } else {
+            mapContainer.classList.add('revealed');
+        }
+
+        // Form submission handling
+        const contactForm = document.querySelector('form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Simple form validation and success message
+            const formData = new FormData(e.target);
+            const submitButton = e.target.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            
+            submitButton.textContent = 'Отправляется...';
+            submitButton.disabled = true;
+            
+            setTimeout(() => {
+                submitButton.textContent = '✓ Отправлено';
+                submitButton.style.backgroundColor = '#10b981';
+                
+                setTimeout(() => {
+                    submitButton.textContent = originalText;
+                    submitButton.style.backgroundColor = '';
+                    submitButton.disabled = false;
+                    e.target.reset();
+                }, 2000);
+            }, 1000);
+        });
+
+        // Add counter animation for statistics
+        const animateCounters = () => {
+            const counters = document.querySelectorAll('.text-4xl.font-bold.text-white');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent.replace(/\D/g, ''));
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    
+                    const suffix = counter.textContent.includes('+') ? '+' : '';
+                    counter.textContent = Math.floor(current) + suffix;
+                }, 16);
+            });
+        };
+
+        // Trigger counter animation when hero section is visible
+        const heroSection = document.querySelector('.hero-bg');
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(animateCounters, 500);
+                    heroObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        heroObserver.observe(heroSection);
+
+        // Add typing effect for hero title
+        const heroTitle = document.querySelector('.hero-bg h1');
+        const originalText = heroTitle.innerHTML;
+        
+        // Only run typing effect on desktop to avoid mobile performance issues
+        if (window.innerWidth > 768) {
+            heroTitle.innerHTML = '';
+            let i = 0;
+            const typeWriter = () => {
+                if (i < originalText.length) {
+                    heroTitle.innerHTML += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
+            };
+            
+            setTimeout(typeWriter, 1000);
+        }
+
+        // Add parallax effect to floating dots
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const dots = document.querySelectorAll('.pulse-dot');
+            
+            dots.forEach((dot, index) => {
+                const speed = 0.5 + (index * 0.2);
+                dot.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Add hover effects to service cards
+        const serviceCards = document.querySelectorAll('.service-card');
+        serviceCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add loading animation
+        // window.addEventListener('load', () => {
+        //     const loader = document.createElement('div');
+        //     loader.className = 'fixed inset-0 bg-gradient-to-br from-white to-blue-600 flex items-center justify-center z-50';
+        //     loader.innerHTML = `
+        //         <div class="text-center">
+        //             <div class="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin mb-4"></div>
+        //         </div>
+        //     `;
+            
+        //     document.body.prepend(loader);
+            
+        //     setTimeout(() => {
+        //         loader.style.opacity = '0';
+        //         loader.style.transition = 'opacity 0.5s ease';
+        //         setTimeout(() => {
+        //             document.body.removeChild(loader);
+        //         }, 500);
+        //     }, 1500);
+        // });
+    </script>
+</body>
+</html>
